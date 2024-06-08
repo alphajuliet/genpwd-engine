@@ -73,11 +73,11 @@ const randomWord = (strength = 0, opts = {}) => {
   }
 
   // puncF :: Map String Boolean -> (() -> String)
-  const puncF = opts["punctuation"] ? G.RandomList(G.symbols) : G.emptyStringF
+  const puncF = opts["punctuation"]==1 ? G.RandomList(G.symbols) : G.emptyStringF
   // numF  :: Map String Boolean -> Integer -> (() -> String)
-  const numF  = n => opts["numbers"] ? G.randomNumericString(n) : G.emptyStringF
+  const numF  = n => opts["numbers"]==1 ? G.randomNumericString(n) : G.emptyStringF
   // capF  :: Map String Boolean -> (() -> String) -> (() -> String)
-  const capF  = f => opts["capitals"] ? R.compose(G.capitalise, f) : f
+  const capF  = f => opts["capitals"]==1 ? R.compose(G.capitalise, f) : f
 
   // word :: Int -> String
   const word = () => {

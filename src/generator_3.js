@@ -34,11 +34,11 @@ const vs = G.WeightedList(
 const randomWord = (strength = 0, opts = {}) => {
 
   // puncF :: Map String Boolean -> (() -> String)
-  let puncF = opts["punctuation"] ? G.RandomList(G.symbols) : G.emptyStringF;
+  let puncF = opts["punctuation"]==1 ? G.RandomList(G.symbols) : G.emptyStringF;
   // numF  :: Map String Boolean -> Integer -> (() -> String)
-  let numF  = n => opts["numbers"] ? G.randomNumericString(n) : G.emptyStringF;
+  let numF  = n => opts["numbers"]==1 ? G.randomNumericString(n) : G.emptyStringF;
   // capF  :: Map String Boolean -> (() -> String) -> (() -> String)
-  let capF  = f => opts["capitals"] ? R.compose(G.capitalise, f) : f;
+  let capF  = f => opts["capitals"]==1 ? R.compose(G.capitalise, f) : f;
 
   var f;
   switch (G.dice(6)) {
