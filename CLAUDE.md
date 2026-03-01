@@ -4,22 +4,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-GenPwd SLS — a serverless password generator deployed on AWS Lambda via the Serverless Framework v3. It exposes HTTP API endpoints that generate random pronounceable words using four different generator algorithms.
+GenPwd — a password generator deployed on Cloudflare Workers. It exposes HTTP API endpoints that generate random pronounceable words using four different generator algorithms.
 
 ## Commands
 
 - **Install dependencies**: `npm install`
-- **Deploy**: `serverless deploy` (requires AWS credentials and Serverless Framework CLI)
-- **Invoke locally**: `serverless invoke local -f generate -d '{"queryStringParameters":{"genId":"3","nwords":"5"}}'`
+- **Local dev server**: `npm run dev` (starts wrangler dev on port 8787)
+- **Deploy**: `npm run deploy` (requires Cloudflare auth via `wrangler login`)
 
 There are no test, lint, or build scripts configured.
 
 ## Architecture
 
-**Entry points** (defined in `serverless.yml`):
-- `GET /` → `index.handler` — simple health/info endpoint
-- `GET /generate` → `src/genpwd.generate` — generates random words
-- `GET /generators` → `src/genpwd.generatorList` — lists available generators
+**Entry point** (`src/index.js`): Cloudflare Worker `fetch` handler with URL-based routing.
+
+**Routes**:
+- `GET /` → app info JSON
+- `GET /generate` → generates random words (via `src/genpwd.js`)
+- `GET /generators` → lists available generators
+- `OPTIONS *` → CORS preflight (204)
 
 **Query parameters** for `/generate`:
 - `genId` (0–3, default 3): which generator algorithm to use
@@ -37,8 +40,9 @@ There are no test, lint, or build scripts configured.
 
 ## Code Conventions
 
+- **ESM modules**: all files use `import`/`export`
 - **Functional style**: heavy use of Ramda (`R.compose`, `R.map`, `R.filter`, etc.) for function composition and data transformation
 - **All `const`**: no `var` or `let`
-- **Lambda response format**: handlers use `callback(null, { statusCode, headers, body })` pattern
-- **CORS**: manually set in response headers within each handler (in addition to framework-level config)
+- **Worker response format**: handlers return `Response` objects with JSON body and CORS headers
+- **CORS**: centralized headers in `src/genpwd.js` (`corsHeaders`), preflight handled in router
 - **Type signatures in comments**: e.g. `// crunch :: [() -> String] -> String`

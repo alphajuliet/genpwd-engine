@@ -3,8 +3,8 @@
 // Pseudo-Japanese style
 // aj
 
-const R = require('ramda');
-const G = require('./gen_common');
+import * as R from 'ramda';
+import * as G from './gen_common.js';
 
 const c1 = G.WeightedList(
   {"k":5,"g":5,"t":5,"d":5,"s":5,"z":4,"h":3,"b":3,
@@ -49,6 +49,6 @@ const randomWord = (strength = 0, opts = {}) => {
   return w;
 };
 
-exports.randomWord = randomWord;
+export { randomWord };
 
 // The End

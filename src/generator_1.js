@@ -3,8 +3,8 @@
 // The original generator
 // aj
 
-const R = require('ramda');
-const G = require('./gen_common');
+import * as R from 'ramda';
+import * as G from './gen_common.js';
 
 const c1 = G.WeightedList(
   {"b":2,"bl":1,"br":1,"c":2,"cr":1,"ch":2,"cl":1,"d":2,"f":2,"fl":1,
@@ -54,6 +54,6 @@ const randomWord = (strength = 0, opts = {}) => {
   return G.crunch(w);
 };
 
-exports.randomWord = randomWord;
+export { randomWord };
 
 // The End

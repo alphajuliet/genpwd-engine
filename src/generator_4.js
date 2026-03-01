@@ -3,8 +3,8 @@
 // Markov chain generator
 // aj
 
-const R = require('ramda')
-const G = require('./gen_common')
+import * as R from 'ramda'
+import * as G from './gen_common.js'
 
 // Generated Markov transition matrix for the given set.
 const allLetters = [' ', '_', "'", 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -60,9 +60,9 @@ const nextLetter = (tr_matrix, symbols, ltr) => {
 
 // Generate a random word of a minimum and maximum length
 const randomWord = (strength = 0, opts = {}) => {
-  let minchar;
+  let minChar;
   switch (strength) {
-    case 0: 
+    case 0:
       minChar = 6; break
     case 1:
       minChar = 12; break
@@ -96,6 +96,6 @@ const randomWord = (strength = 0, opts = {}) => {
   return G.crunch(f)
 }
 
-exports.randomWord = randomWord
+export { randomWord }
 
 // The End

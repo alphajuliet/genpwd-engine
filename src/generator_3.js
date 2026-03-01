@@ -3,8 +3,8 @@
 // Another attempt at Englishy words
 // aj
 
-const R = require('ramda');
-const G = require('./gen_common');
+import * as R from 'ramda';
+import * as G from './gen_common.js';
 
 // Consonants
 const c = G.WeightedList(
@@ -55,6 +55,6 @@ const randomWord = (strength = 0, opts = {}) => {
   return G.crunch(w);
 };
 
-exports.randomWord = randomWord;
+export { randomWord };
 
 // The End

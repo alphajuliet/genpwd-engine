@@ -2,7 +2,7 @@
 // Common functions across generators
 // aj
 
-const R = require('ramda');
+import * as R from 'ramda';
 
 // Capitalise a word
 // capitalise :: String -> String
@@ -60,16 +60,16 @@ const emptyStringF = R.always("");
 // crunch :: [() -> String] -> String
 const crunch = f => R.join('', R.juxt(R.flatten(f))());
 
-module.exports = {
-  capitalise: capitalise,
-  randomNumericString: randomNumericString,
-  dice: dice,
-  symbols: symbols,
-  RandomList: RandomList,
-  WeightedList: WeightedList,
-  trRandElement: trRandElement,
-  emptyStringF: emptyStringF,
-  crunch: crunch
+export {
+  capitalise,
+  randomNumericString,
+  dice,
+  symbols,
+  RandomList,
+  WeightedList,
+  trRandElement,
+  emptyStringF,
+  crunch
 };
 
 // The End
