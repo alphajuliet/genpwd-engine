@@ -1,8 +1,6 @@
-# genpwd-sls
+# genpwd-engine
 
-This is an alternate implementation of the back-end GenPwd function-as-a-service using [Serverless](https://serverless.com). The previous version on Autocode/StdLib is unavailable.
-
-It is exposed as an HTTP URI and deployed on AWS.
+A back-end GenPwd function-as-a-service deployed on [Cloudflare Workers](https://workers.cloudflare.com).
 
 There are two functions:
 - `{uri}/generators` - this returns a list of the available generators, including the default
